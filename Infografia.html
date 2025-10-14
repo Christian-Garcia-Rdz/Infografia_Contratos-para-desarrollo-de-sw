@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contratos para Desarrollo de Software</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: #2a5298;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .card h3 {
+            color: #1e3c72;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-icon {
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9em;
+        }
+        
+        .card p {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .highlight-box h3 {
+            color: #c92a2a;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .checklist {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .checklist-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.3s ease;
+        }
+        
+        .checklist-item:hover {
+            background: #e7f5ff;
+        }
+        
+        .check {
+            width: 24px;
+            height: 24px;
+            background: #51cf66;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            background: white;
+        }
+        
+        .comparison-table tr:hover td {
+            background: #f8f9fa;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 20px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 20px;
+            width: 15px;
+            height: 15px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+        
+        .timeline-item h4 {
+            color: #2a5298;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .pro-tip {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #37b24d;
+        }
+        
+        .pro-tip strong {
+            color: #2b8a3e;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Contratos para Desarrollo de Software</h1>
+            <p>Guía completa para proyectos exitosos</p>
+        </header>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">📝</div>
+                    Tipos de Contratos
+                </h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3><span class="card-icon">💰</span>Precio Fijo</h3>
+                        <p><strong>Definición:</strong> Se acuerda un precio total por el proyecto completo con alcance definido.</p>
+                        <p><strong>Ideal para:</strong> Proyectos con requisitos claros y estables.</p>
+                        <p><strong>Ventajas:</strong> Presupuesto predecible, menor riesgo financiero para el cliente.</p>
+                        <p><strong>Desventajas:</strong> Menor flexibilidad para cambios, puede ser más caro.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="card-icon">⏱️</span>Tiempo y Material</h3>
+                        <p><strong>Definición:</strong> Se paga por horas trabajadas más los materiales utilizados.</p>
+                        <p><strong>Ideal para:</strong> Proyectos con requisitos cambiantes o poco definidos.</p>
+                        <p><strong>Ventajas:</strong> Alta flexibilidad, adaptación continua, transparencia en costos.</p>
+                        <p><strong>Desventajas:</strong> Presupuesto menos predecible, requiere más supervisión.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="card-icon">🤝</span>Dedicación Exclusiva</h3>
+                        <p><strong>Definición:</strong> Se contrata un equipo dedicado por un período determinado.</p>
+                        <p><strong>Ideal para:</strong> Proyectos de largo plazo o necesidades continuas.</p>
+                        <p><strong>Ventajas:</strong> Equipo comprometido, conocimiento profundo del negocio.</p>
+                        <p><strong>Desventajas:</strong> Compromiso de largo plazo, costos mensuales fijos.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="card-icon">🎯</span>Pago por Hitos</h3>
+                        <p><strong>Definición:</strong> El pago se realiza al alcanzar objetivos específicos del proyecto.</p>
+                        <p><strong>Ideal para:</strong> Proyectos con entregables claros y medibles.</p>
+                        <p><strong>Ventajas:</strong> Balance entre flexibilidad y control, pagos escalonados.</p>
+                        <p><strong>Desventajas:</strong> Requiere definición clara de hitos, posibles disputas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">⚖️</div>
+                    Comparación de Modelos
+                </h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Precio Fijo</th>
+                            <th>Tiempo y Material</th>
+                            <th>Dedicación Exclusiva</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Flexibilidad</strong></td>
+                            <td>❌ Baja</td>
+                            <td>✅ Alta</td>
+                            <td>✅ Alta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Predictibilidad de Costos</strong></td>
+                            <td>✅ Alta</td>
+                            <td>⚠️ Media</td>
+                            <td>✅ Alta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Control del Cliente</strong></td>
+                            <td>⚠️ Medio</td>
+                            <td>✅ Alto</td>
+                            <td>✅ Muy Alto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Duración Típica</strong></td>
+                            <td>3-6 meses</td>
+                            <td>Variable</td>
+                            <td>6-12+ meses</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Riesgo para Cliente</strong></td>
+                            <td>✅ Bajo</td>
+                            <td>⚠️ Medio</td>
+                            <td>⚠️ Medio</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">📄</div>
+                    Cláusulas Esenciales
+                </h2>
+                
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Alcance del Proyecto:</strong> Descripción detallada de funcionalidades, entregables y especificaciones técnicas.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Cronograma y Plazos:</strong> Fechas de inicio, hitos intermedios y entrega final con penalizaciones por retrasos.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Propiedad Intelectual:</strong> Definir quién posee el código, licencias de software y derechos de uso.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Confidencialidad (NDA):</strong> Protección de información sensible y datos del cliente.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Criterios de Aceptación:</strong> Estándares de calidad, pruebas y proceso de aprobación de entregables.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Condiciones de Pago:</strong> Forma, plazos y montos de pagos anticipados, parciales y finales.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Gestión de Cambios:</strong> Procedimiento para solicitar, evaluar y aprobar modificaciones al alcance.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Soporte y Mantenimiento:</strong> Período de garantía, corrección de errores y soporte post-lanzamiento.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Resolución de Disputas:</strong> Mecanismos de mediación, arbitraje y jurisdicción aplicable.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check">✓</div>
+                        <div><strong>Terminación del Contrato:</strong> Causales, procedimiento y consecuencias de finalización anticipada.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">🛣️</div>
+                    Proceso de Contratación
+                </h2>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>1. Definición de Necesidades</h4>
+                        <p>Identificar objetivos del proyecto, funcionalidades requeridas y presupuesto disponible.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>2. Investigación de Proveedores</h4>
+                        <p>Buscar desarrolladores o empresas, revisar portfolios, referencias y experiencia relevante.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>3. Solicitud de Propuestas (RFP)</h4>
+                        <p>Enviar documentación detallada del proyecto y solicitar cotizaciones con alcance, tiempos y costos.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>4. Evaluación y Selección</h4>
+                        <p>Comparar propuestas, realizar entrevistas técnicas y verificar capacidad de ejecución.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>5. Negociación de Términos</h4>
+                        <p>Ajustar condiciones comerciales, técnicas y legales hasta llegar a un acuerdo mutuo.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>6. Revisión Legal</h4>
+                        <p>Hacer que abogados especializados revisen el contrato antes de la firma.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>7. Firma y Kick-off</h4>
+                        <p>Formalizar el acuerdo y realizar reunión inicial para alinear expectativas y comenzar desarrollo.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>⚠️ Errores Comunes a Evitar</h3>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <div class="check" style="background: #fa5252;">✗</div>
+                        <div>No definir claramente el alcance, causando disputas sobre qué está incluido.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check" style="background: #fa5252;">✗</div>
+                        <div>Omitir cláusulas de propiedad intelectual, generando conflictos sobre derechos del código.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check" style="background: #fa5252;">✗</div>
+                        <div>No establecer criterios de aceptación medibles y objetivos.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check" style="background: #fa5252;">✗</div>
+                        <div>Ignorar la necesidad de un proceso formal para gestión de cambios.</div>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="check" style="background: #fa5252;">✗</div>
+                        <div>No incluir penalizaciones claras por incumplimiento de plazos o calidad.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pro-tip">
+                <strong>💡 Consejo Profesional:</strong>
+                Independientemente del tipo de contrato elegido, asegúrate de incluir una cláusula de comunicación que especifique la frecuencia de reuniones, canales de comunicación, y responsables de cada parte. La comunicación efectiva es clave para el éxito de cualquier proyecto de desarrollo de software.
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="icon">🔑</div>
+                    Mejores Prácticas
+                </h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3><span class="card-icon">📊</span>Documentación Completa</h3>
+                        <p>Mantén toda la comunicación, cambios y decisiones documentadas por escrito. Usa herramientas de gestión de proyectos y firma digitalmente los cambios aprobados.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="card-icon">🔄</span>Iteraciones y Revisiones</h3>
+                        <p>Establece ciclos de revisión frecuentes (sprints de 2-4 semanas) para validar avances y ajustar el rumbo tempranamente si es necesario.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="card-icon">🛡️</span>Protección de Datos</h3>
+                        <p>Incluye cláusulas de cumplimiento con regulaciones como GDPR, CCPA o leyes locales de protección de datos personales y privacidad.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><span class="card-icon">🎓</span>Transferencia de Conocimiento</h3>
+                        <p>Asegura que el contrato incluya capacitación del equipo interno, documentación técnica completa y sesiones de transferencia de conocimiento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>Recuerda:</strong> Un buen contrato protege a ambas partes y establece las bases para una colaboración exitosa.</p>
+            <p>Siempre consulta con un abogado especializado en tecnología antes de firmar cualquier contrato.</p>
+        </footer>
+    </div>
+</body>
+</html>
